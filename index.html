@@ -4,110 +4,127 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Пловная — плов и восточная кухня в Бишкеке</title>
-<meta name="description" content="Пловная — кафе национальной и восточной кухни в Бишкеке. Три филиала, свежий плов дважды в день, 100% халал.">
-<meta name="theme-color" content="#132E53">
+<meta name="description" content="Пловная — кафе национальной и восточной кухни в Бишкеке. Три филиала, меню каждого филиала, свежий плов дважды в день, 100% халал.">
+<meta name="theme-color" content="#4A2C1A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Временные веб-шрифты: Oswald вместо KZ Plakat Titul, PT Serif вместо Korinna. Заменить на фирменные, когда будут файлы шрифтов. -->
+<!-- Временные веб-шрифты: Oswald вместо KZ Plakat Titul, PT Serif вместо Korinna. -->
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#132E53; --navy-deep:#111E31; --navy-soft:#265088;
-    --terra:#CC783D; --terra-soft:#DEA67C;
-    --cream:#FDF8E1; --cream-2:#FFEBAD;
-    --gray:#DAD9D6; --sage:#80897A; --taupe:#6C5C54;
-    --peach:#E9C3A5; --peach-card:#F1D3BB;
+    /* Только бежевые, коричневые и немного оранжевого */
+    --espresso:#3A2214; --coffee:#4A2C1A; --brown:#6E4426; --cocoa:#8A5A36;
+    --orange:#D9782D; --orange-soft:#E9A66A;
+    --beige:#F6E4D2; --beige-2:#EFD3B6; --sand:#E2BF9C; --card:rgba(255,248,240,.78);
+    --text:#3A2214; --muted:#7A5A44; --line:rgba(110,68,38,.18);
+    --accent:#C9671F; --accent-soft:#F3D2B3;       /* меняется по филиалу */
     --head:'Oswald','Arial Narrow',sans-serif;
     --body:'PT Serif',Georgia,serif;
   }
+  /* Оттенки филиалов */
+  body[data-branch="erkindik"]{--accent:#C9671F;--accent-soft:#F3D2B3}   /* терракотовый оранжевый */
+  body[data-branch="eq"]{--accent:#A8742A;--accent-soft:#EED9B4}         /* карамель */
+  body[data-branch="sevas"]{--accent:#7B4A2B;--accent-soft:#E6CDB6}      /* шоколад */
+
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:var(--body);background:var(--cream);color:var(--navy-deep);line-height:1.5;-webkit-font-smoothing:antialiased}
+  body{font-family:var(--body);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background:var(--beige);position:relative;min-height:100vh}
+  /* Бежевая бумага из меню */
+  body::before{content:"";position:fixed;inset:0;z-index:-1;
+    background:url(paper.jpg) center/cover no-repeat, linear-gradient(90deg,#F8E7D6,#EAC6A2)}
   a{color:inherit}
-  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px}
 
   /* Шапка */
-  header.hero{background:var(--navy);color:var(--cream);padding:48px 0 40px;text-align:center;position:relative;overflow:hidden}
-  .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:14px;
-    background:repeating-linear-gradient(90deg,var(--terra) 0 14px,var(--cream) 14px 28px,var(--navy-soft) 28px 42px,var(--cream) 42px 56px)}
+  header.hero{background:var(--coffee);color:var(--beige);padding:44px 0 38px;text-align:center;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:12px;
+    background:repeating-linear-gradient(90deg,var(--orange) 0 14px,var(--beige) 14px 28px,var(--cocoa) 28px 42px,var(--beige) 42px 56px)}
   .logo{font-family:var(--head);font-weight:600;font-size:clamp(44px,12vw,72px);letter-spacing:.06em;line-height:1}
   .logo-sub{font-family:var(--head);font-weight:500;letter-spacing:.3em;font-size:13px;opacity:.75;margin-top:8px;text-transform:uppercase}
-  .slogan{margin-top:22px;font-size:18px;font-style:italic;color:var(--cream-2)}
-  .badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:22px}
-  .badge{font-family:var(--head);font-size:13px;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(253,248,225,.35);padding:6px 12px;border-radius:999px}
+  .slogan{margin-top:20px;font-size:18px;font-style:italic;color:var(--orange-soft)}
+  .badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+  .badge{font-family:var(--head);font-size:13px;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(246,228,210,.35);padding:6px 12px;border-radius:999px}
 
-  /* Навигация */
-  nav.tabs{position:sticky;top:0;z-index:10;background:var(--cream);border-bottom:1px solid var(--gray)}
-  nav.tabs .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
-  nav.tabs .wrap::-webkit-scrollbar{display:none}
-  nav.tabs a{flex:none;text-decoration:none;font-family:var(--head);font-size:14px;letter-spacing:.06em;text-transform:uppercase;
-    padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--gray);color:var(--navy)}
-  nav.tabs a:active{background:var(--terra);color:#fff;border-color:var(--terra)}
+  /* Переключатель филиалов */
+  .switch{position:sticky;top:0;z-index:20;background:rgba(246,228,210,.94);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  .switch .wrap{padding-top:10px;padding-bottom:10px}
+  .branches-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .btab{appearance:none;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:8px 6px;cursor:pointer;
+    font-family:var(--head);font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--brown);line-height:1.15;text-align:center}
+  .btab small{display:block;font-family:var(--body);text-transform:none;letter-spacing:0;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .btab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#FFF8F0}
+  .btab[aria-selected="true"] small{color:rgba(255,248,240,.85)}
+  .chips{display:flex;gap:6px;overflow-x:auto;margin-top:8px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:none;text-decoration:none;font-family:var(--head);font-size:13px;letter-spacing:.05em;text-transform:uppercase;
+    padding:6px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--brown)}
+  .chips a:active{background:var(--accent);color:#fff}
 
-  section{padding:40px 0}
-  h2{font-family:var(--head);font-weight:600;font-size:28px;letter-spacing:.04em;text-transform:uppercase;color:var(--navy);margin-bottom:6px}
-  .lead{color:var(--taupe);margin-bottom:22px}
+  /* Инфо о филиале */
+  .binfo{margin-top:22px;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:14px;padding:14px 16px}
+  .binfo h2{font-family:var(--head);font-weight:600;font-size:22px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
+  .binfo p{font-size:15px;color:var(--muted)}
+  .binfo .row{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:4px;font-size:15px}
+  .binfo .row b{color:var(--text)}
 
-  /* Плашка «свежий плов» */
-  .fresh{background:var(--terra);color:#fff;border-radius:18px;padding:22px;display:flex;gap:18px;align-items:center}
-  .fresh .times{font-family:var(--head);font-size:34px;font-weight:600;line-height:1;white-space:nowrap}
-  .fresh p{font-size:16px}
+  section{padding:28px 0}
+  .cat{padding-top:26px;scroll-margin-top:150px}
+  .cat h3{font-family:var(--head);font-weight:600;font-size:22px;letter-spacing:.05em;text-transform:uppercase;color:var(--brown);
+    border-bottom:2px solid var(--accent);padding-bottom:6px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .cat h3 .vol{font-size:14px;color:var(--accent);letter-spacing:.04em}
+  .cat .note{font-size:14.5px;color:var(--muted);margin:8px 0 12px}
+  .cat .note.hot{background:var(--accent);color:#FFF8F0;border-radius:14px;padding:14px 16px;font-size:15.5px;display:flex;gap:14px;align-items:center}
+  .cat .note.hot b{font-family:var(--head);font-size:28px;line-height:1;white-space:nowrap;font-weight:600}
 
-  /* Меню */
-  .cat{margin-top:30px}
-  .cat h3{font-family:var(--head);font-weight:500;font-size:20px;letter-spacing:.06em;text-transform:uppercase;color:var(--terra);
-    border-bottom:2px solid var(--terra-soft);padding-bottom:6px;margin-bottom:10px}
-  .item{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px dashed var(--gray)}
-  .item .name{font-weight:700}
-  .item .desc{font-size:14px;color:var(--taupe)}
-  .item .price{font-family:var(--head);font-size:18px;white-space:nowrap;color:var(--navy)}
+  /* Карточки блюд */
+  .dishes{display:grid;gap:12px;margin-top:12px}
+  @media (min-width:620px){.dishes{grid-template-columns:1fr 1fr}}
+  .dish{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+  .dish img{aspect-ratio:4/3;width:100%;object-fit:cover;display:block}
+  .dish .body{padding:14px 16px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+  .dish .name{font-size:18.5px;font-weight:700;color:var(--text);line-height:1.25}
+  .dish .desc{font-size:14.5px;color:var(--muted);line-height:1.45}
+  .dish .foot{margin-top:auto;padding-top:8px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .dish .w{font-size:13.5px;color:var(--muted)}
+  .price{font-family:var(--head);font-size:19px;color:var(--accent);white-space:nowrap}
   .tag{display:inline-block;font-family:var(--head);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-    background:var(--sage);color:#fff;padding:2px 8px;border-radius:999px;margin-left:6px;vertical-align:middle}
-  .placeholder{background:#fff;border:1px dashed var(--terra-soft);border-radius:14px;padding:16px;color:var(--taupe);font-size:15px}
+    background:var(--accent-soft);color:var(--brown);padding:2px 8px;border-radius:999px;margin-right:4px;vertical-align:2px}
+  .tag.hit,.tag.new{background:var(--orange);color:#fff}
 
-  /* Фото-меню: карточки «фото + название + состав + цена» */
-  #menu{background:var(--peach)}
-  #menu .cat h3{border-bottom-color:rgba(204,120,61,.35)}
-  .dishes{display:grid;gap:16px}
-  @media (min-width:600px){.dishes{grid-template-columns:1fr 1fr}}
-  .dish{background:var(--peach-card);border:1px solid rgba(108,92,84,.18);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
-  .dish .photo{aspect-ratio:4/3;width:100%;object-fit:cover;display:block;background:#E3B08A}
-  .dish .photo.empty{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;
-    background:
-      radial-gradient(circle at 50% 50%,rgba(253,248,225,.55) 0 22%,transparent 23%),
-      repeating-linear-gradient(45deg,#E3B08A 0 12px,#E7B994 12px 24px);
-    color:var(--taupe);font-family:var(--head);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
-  .dish .photo.empty::before{content:"";width:44px;height:44px;border-radius:50%;border:2px solid rgba(108,92,84,.45);
-    box-shadow:inset 0 0 0 6px rgba(253,248,225,.6)}
-  .dish .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px;flex:1}
-  .dish .name{font-size:19px;color:var(--navy-deep)}
-  .dish .desc{font-size:14.5px;color:var(--taupe);line-height:1.45}
-  .dish .price{margin-top:auto;padding-top:8px;font-family:var(--head);font-size:18px;color:var(--terra)}
-  .dish .price:empty{display:none}
-  .menu-note{font-size:14px;color:var(--taupe);background:var(--peach-card);border-radius:10px;padding:12px 14px;margin-top:18px}
+  /* Списки: напитки, допы, соусы */
+  .list{margin-top:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px 16px}
+  .li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .li:last-child{border-bottom:0}
+  .li .n{font-weight:700}
+  .li .n small{display:block;font-weight:400;font-size:13.5px;color:var(--muted)}
+  .li .r{text-align:right;white-space:nowrap}
+  .li .r small{display:block;font-size:12.5px;color:var(--muted)}
+  .li .price{font-size:17px}
 
-  /* Филиалы */
-  .branches{display:grid;gap:14px}
-  .branch{background:#fff;border-radius:18px;padding:20px;border:1px solid var(--gray)}
-  .branch h3{font-family:var(--head);font-weight:600;font-size:22px;letter-spacing:.04em;text-transform:uppercase;color:var(--navy)}
-  .branch .hours{font-family:var(--head);font-size:20px;color:var(--terra);margin:4px 0 6px}
-  .branch .addr{font-size:15px;color:var(--taupe)}
-  .branch .only{margin-top:10px;font-size:14px;background:var(--cream);border-radius:10px;padding:10px 12px}
-  .branch a.map{display:inline-block;margin-top:12px;font-family:var(--head);font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--navy-soft)}
-
-  /* Контакты */
+  /* Филиалы, доставка, контакты */
+  h2.sec{font-family:var(--head);font-weight:600;font-size:28px;letter-spacing:.04em;text-transform:uppercase;color:var(--brown);margin-bottom:6px}
+  .lead{color:var(--muted);margin-bottom:18px}
+  .bcards{display:grid;gap:12px}
+  .bcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;border-top:5px solid var(--c)}
+  .bcard h3{font-family:var(--head);font-weight:600;font-size:21px;letter-spacing:.04em;text-transform:uppercase;color:var(--brown)}
+  .bcard .hours{font-family:var(--head);font-size:19px;color:var(--c);margin:2px 0 4px}
+  .bcard .addr{font-size:15px;color:var(--muted)}
+  .bcard .only{margin-top:10px;font-size:14px;background:rgba(255,255,255,.5);border-radius:10px;padding:9px 12px}
+  .bcard .acts{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:10px}
+  .bcard .acts a,.bcard .acts button{font-family:var(--head);font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--brown);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
   .btns{display:grid;gap:10px}
-  .btn{display:block;text-align:center;text-decoration:none;font-family:var(--head);font-size:17px;letter-spacing:.08em;text-transform:uppercase;
-    padding:16px;border-radius:14px;background:var(--navy);color:var(--cream)}
-  .btn.terra{background:var(--terra);color:#fff}
-  .btn.light{background:#fff;color:var(--navy);border:1px solid var(--gray)}
+  .btn{display:block;text-align:center;text-decoration:none;font-family:var(--head);font-size:16px;letter-spacing:.07em;text-transform:uppercase;
+    padding:15px;border-radius:14px;background:var(--coffee);color:var(--beige)}
+  .btn.or{background:var(--orange);color:#fff}
+  .btn.light{background:var(--card);color:var(--brown);border:1px solid var(--line)}
 
-  footer{background:var(--navy-deep);color:var(--cream);text-align:center;padding:28px 0 36px;font-size:14px}
-  footer .kg{font-style:italic;color:var(--cream-2);margin-bottom:8px}
-  footer small{opacity:.6}
+  footer{background:var(--espresso);color:var(--beige);text-align:center;padding:28px 0 36px;font-size:14px;margin-top:20px}
+  footer .kg{font-style:italic;color:var(--orange-soft);margin-bottom:8px}
+  footer small{opacity:.65;display:block}
 </style>
 </head>
-<body>
+<body data-branch="erkindik">
 
 <header class="hero">
   <div class="wrap">
@@ -117,225 +134,51 @@
     <div class="badges">
       <span class="badge">3 филиала</span>
       <span class="badge">100% халал</span>
-      <span class="badge">Бишкек</span>
+      <span class="badge">10% прибыли — на благотворительность</span>
     </div>
   </div>
 </header>
 
-<nav class="tabs" aria-label="Разделы">
+<div class="switch">
   <div class="wrap">
-    <a href="#menu">Меню</a>
-    <a href="#branches">Филиалы</a>
-    <a href="#delivery">Доставка</a>
-    <a href="#contacts">Контакты</a>
+    <div class="branches-tabs" role="tablist" aria-label="Филиал">
+      <button class="btab" role="tab" data-b="erkindik">Эркиндик<small>бульвар Эркиндик, 46</small></button>
+      <button class="btab" role="tab" data-b="eq">English Quarter<small>Аалы Токомбаева, 24</small></button>
+      <button class="btab" role="tab" data-b="sevas">Севастопольская<small>Севастопольская, 34</small></button>
+    </div>
+    <nav class="chips" id="chips" aria-label="Разделы меню"></nav>
   </div>
-</nav>
+</div>
 
 <main>
-  <section id="menu">
+  <section id="menu" style="padding-top:0">
     <div class="wrap">
-      <h2>Меню</h2>
-      <p class="lead">Национальная и восточная кухня: знакомая еда, современная среда, тёплое отношение.</p>
-
-      <div class="fresh">
-        <div class="times">12:00<br>19:00</div>
-        <p>Казан со свежим пловом открываем два раза в день. Приходите к открытию, пока плов самый горячий.</p>
-      </div>
-
-      <!-- ФОТО-МЕНЮ. Формат карточки: фото, название, состав, цена.
-           Фото: заменить <div class="photo empty" ...> на <img class="photo" src="img/....jpg" alt="Название">.
-           Состав: <div class="desc">...</div>. Цена: вписать в <div class="price"></div>, например «450 сом».
-           Состав и цены брать только из актуального меню Пловной, ничего не придумывать. -->
-      <p class="menu-note">Фото, состав и цены добавим после сверки с актуальным меню.</p>
-
-      <div class="cat">
-        <h3>Плов</h3>
-        <div class="dishes">
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Ташкентский плов</div>
-              <div class="price"></div>
-            </div>
-          </article>
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Чайханский плов</div>
-              <div class="price"></div>
-            </div>
-          </article>
-        </div>
-      </div>
-
-      <div class="cat">
-        <h3>Горячие блюда</h3>
-        <div class="dishes">
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Бешбармак</div>
-              <div class="price"></div>
-            </div>
-          </article>
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Куурдак</div>
-              <div class="price"></div>
-            </div>
-          </article>
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Манты</div>
-              <div class="price"></div>
-            </div>
-          </article>
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Хошан</div>
-              <div class="price"></div>
-            </div>
-          </article>
-        </div>
-      </div>
-
-      <div class="cat">
-        <h3>Супы</h3>
-        <div class="dishes">
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Шорпо</div>
-              <div class="price"></div>
-            </div>
-          </article>
-        </div>
-      </div>
-
-      <div class="cat">
-        <h3>Мангал <span class="tag">только Эркиндик</span></h3>
-        <div class="dishes">
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Шашлык</div>
-              <div class="price"></div>
-            </div>
-          </article>
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Шишкебек</div>
-              <div class="price"></div>
-            </div>
-          </article>
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Кебаб</div>
-              <div class="price"></div>
-            </div>
-          </article>
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Лаваш на мангале с мясом</div>
-              <div class="price"></div>
-            </div>
-          </article>
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Лаваш на мангале с курицей</div>
-              <div class="price"></div>
-            </div>
-          </article>
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Баклажан «Биштак»</div>
-              <div class="price"></div>
-            </div>
-          </article>
-        </div>
-      </div>
-
-      <div class="cat">
-        <h3>Самса и выпечка</h3>
-        <div class="dishes">
-          <article class="dish">
-            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
-            <div class="body">
-              <div class="name">Самса</div>
-              <div class="price"></div>
-            </div>
-          </article>
-        </div>
-      </div>
-
-      <div class="cat">
-        <h3>Салаты, гарниры, соусы</h3>
-        <div class="placeholder">Раздел заполнится по актуальному меню.</div>
-      </div>
-
-      <div class="cat">
-        <h3>Завтраки</h3>
-        <div class="placeholder">Раздел заполнится по актуальному меню.</div>
-      </div>
-
-      <div class="cat">
-        <h3>Десерты и напитки</h3>
-        <div class="placeholder">Чай, напитки и десерты. Раздел заполнится по актуальному меню.</div>
-      </div>
+      <div class="binfo" id="binfo"></div>
+      <div id="menuBody"></div>
     </div>
   </section>
 
-  <section id="branches" style="background:#fff8ec">
+  <section id="branches">
     <div class="wrap">
-      <h2>Филиалы</h2>
-      <p class="lead">Три Пловные в Бишкеке. Перед праздниками часы работы могут меняться.</p>
-      <div class="branches">
-        <div class="branch">
-          <h3>Бульвар Эркиндик</h3>
-          <div class="hours">10:00 – 01:00</div>
-          <div class="addr">бульвар Эркиндик, 46 · <a href="tel:+996508750000">0508 750 000</a></div>
-          <div class="only">Только здесь есть мангал: шашлык, шишкебек, кебаб, лаваш на мангале и баклажан «Биштак».</div>
-          <a class="map" href="https://2gis.kg/bishkek/search/%D0%9F%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0%D1%8F%20%D0%AD%D1%80%D0%BA%D0%B8%D0%BD%D0%B4%D0%B8%D0%BA%2046" target="_blank" rel="noopener">Открыть в 2ГИС →</a>
-        </div>
-        <div class="branch">
-          <h3>English Quarter</h3>
-          <div class="hours">08:00 – 00:00</div>
-          <div class="addr">ул. Аалы Токомбаева, 24 · <a href="tel:+996700250000">0700 250 000</a></div>
-          <div class="only">Завтраки с 08:00 до 14:00 и барное меню: авторские чаи, кофе, лимонады, смузи.</div>
-          <a class="map" href="https://2gis.kg/bishkek/search/%D0%9F%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0%D1%8F" target="_blank" rel="noopener">Открыть в 2ГИС →</a>
-        </div>
-        <div class="branch">
-          <h3>Севастопольская</h3>
-          <div class="hours">09:00 – 00:00</div>
-          <div class="addr">ул. Севастопольская, 34 · <a href="tel:+996501301301">0501 301 301</a></div>
-          <a class="map" href="https://2gis.kg/bishkek/search/%D0%9F%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0%D1%8F" target="_blank" rel="noopener">Открыть в 2ГИС →</a>
-        </div>
-      </div>
+      <h2 class="sec">Филиалы</h2>
+      <p class="lead">Три Пловные в Бишкеке. Меню в филиалах отличается — выберите филиал сверху.</p>
+      <div class="bcards" id="bcards"></div>
     </div>
   </section>
 
-  <section id="delivery">
+  <section id="delivery" style="padding-top:0">
     <div class="wrap">
-      <h2>Доставка</h2>
-      <p class="lead">Заказать можно через Glovo и Яндекс Еду. Зону и время доставки уточняйте по телефону.</p>
+      <h2 class="sec">Доставка</h2>
+      <p class="lead">Заказать можно через Glovo и Яндекс Еду. Зону и время доставки уточняйте по телефону филиала.</p>
     </div>
   </section>
 
   <section id="contacts" style="padding-top:0">
     <div class="wrap">
-      <h2>Контакты</h2>
-      <p class="lead">Позвоните или напишите нам, поможем с заказом и бронью.</p>
+      <h2 class="sec">Контакты</h2>
+      <p class="lead">Скачайте приложение UDS: копите баллы и оплачивайте ими до 50% счёта.</p>
       <div class="btns">
-        <a class="btn terra" href="tel:+996508750000">Позвонить · 0508 750 000</a>
-        <!-- TODO: WhatsApp — вставить подтверждённый номер, например https://wa.me/996XXXXXXXXX -->
+        <a class="btn or" id="callBtn" href="tel:+996508750000">Позвонить</a>
         <a class="btn" href="https://instagram.com/plovnaya_bishkek" target="_blank" rel="noopener">Instagram · @plovnaya_bishkek</a>
         <a class="btn light" href="https://taplink.cc/plovnaya" target="_blank" rel="noopener">Все ссылки</a>
       </div>
@@ -346,9 +189,270 @@
 <footer>
   <div class="wrap">
     <p class="kg">Үйдөгүдөй даам, көңүлдөгүдөй жылуулук</p>
+    <small>Цены в сомах. 10% прибыли идёт на благотворительность.</small>
     <small>© Пловная, Бишкек</small>
   </div>
 </footer>
 
+<script>
+/* ============================================================
+   МЕНЮ ПО ФИЛИАЛАМ — данные из финальных PDF-меню.
+   Карточка: n — название, d — состав, p — цена, w — вес/объём,
+   t — метки (new, hit, spicy, veg), img — путь к фото (img/....jpg).
+   Чтобы добавить фото: впишите img:"img/имя.jpg" нужному блюду.
+   ============================================================ */
+
+const PLOV_NOTE = {hot:true, html:'<b>12:00<br>19:00</b><span>Казан со свежим пловом открываем два раза в день. Приходите к открытию, пока плов самый горячий.</span>'};
+
+const plov = (o={}) => ({id:'plov', title:'Плов в казане', note:PLOV_NOTE, items:[
+  {n:'Ташкентский плов', d:'Баранина, рис лазер, жёлтая морковь, нут, кишмиш, зира', p:'360 / 390', w:'300 / 400 г'},
+  {n:'Чайханский плов', d:'Баранина, рис лазер, жёлтая морковь, зира, чеснок, курдюк, чили перец', p:'360 / 390', w:'300 / 400 г'},
+  {n:'Бешбармак', d:'Конина, казы, домашняя лапша, репчатый лук, зелёный лук, маринованный острый перчик. Подаётся с бульоном ак-серке', p:'460 / 540', w:'0,7 / 1 порция'},
+  {n:'Фирменный куурдак', d:'Обжаренные бараньи рёбра с картофелем по-деревенски, луком и халапеньо', p:'710', w:'350 г'},
+  {n:'Курутоб', d:'Телятина, каттама, помидоры, огурцы, красный лук, курут и фирменный соус курутоб', p:'620', w:'500 г'},
+]});
+
+const plovExtras = (extraMeat65) => ({id:'extras', title:'Допы к плову', list:true, items:[
+  {n:'Дополнительное мясо', p:extraMeat65, w:'65 г'},
+  {n:'Дополнительное мясо', p:'180', w:'60 г'},
+  {n:'Казы', p:'180', w:'3 шт'},
+  {n:'Куриное яйцо', p:'40', w:'1 шт'},
+  {n:'Перепелиные яйца', p:'50', w:'3 шт'},
+  {n:'Маринованный острый перчик', p:'35', w:'20 г'},
+  {n:'Шакарап', p:'130', w:'100 г'},
+  {n:'Долма', p:'75', w:'1 шт'},
+  {n:'Бульон ак-серке', p:'80', w:'100 мл'},
+]});
+
+const BOWL_D = 'Нежная куриная грудка, рис, огурцы, помидоры черри, консервированная фасоль, кукуруза и зелень. Подаётся с соусом терияки';
+const hot = (bowlW) => ({id:'hot', title:'Горячие блюда', items:[
+  {n:'Томлёное мясо', d:'Говяжья шея, репчатый лук, острый перец. Гарнир на выбор: рис лазер или картофель по-деревенски', p:'510 / 550', w:'350 г'},
+  {n:'Телятина с грибами', d:'Телятина, шампиньоны, лук и чеснок в сливочном соусе. Подаётся с картофельным пюре, корнишонами и помидорами черри', p:'540', w:'450 г'},
+  {n:'Курица с грибами', d:'Куриное бедро и шампиньоны в сливочном соусе. Подаётся с картофельным пюре, корнишонами и помидорами черри', p:'480', w:'450 г'},
+  {n:'Боул с курицей', d:BOWL_D, p:'480', w:bowlW},
+  {n:'Куриная грудка и микс салат', d:'Куриное филе, помидоры черри, огурцы, микс салат, соус дзадзики', p:'430', w:'350 г'},
+  {n:'Долма', d:'Говяжий фарш, виноградные листья, рис, помидор, болгарский перец, кинза, репчатый лук', p:'75 / 400', w:'1 шт / порция'},
+  {n:'Вареники с картофелем и грибами', d:'Картофельное пюре, шампиньоны, репчатый лук, петрушка. Подаются со сметаной', p:'290', w:'220 г'},
+  {n:'Хошан-манты', d:'Говядина, говяжий жир, репчатый лук, зира, чёрный перец. Подаются с томатным соусом', p:'90 / 430', w:'1 шт / порция'},
+  {n:'Манты с мясом', d:'Говядина, репчатый лук, чёрный перец, говяжий жир, зира. Подаются с чесночным соусом', p:'85 / 410', w:'1 шт / порция'},
+]});
+
+const soups = {id:'soups', title:'Супы', items:[
+  {n:'Шеш беш', d:'Конина, бульон из конины, казы, домашняя лапша, сузьма', p:'340', w:'350 г'},
+  {n:'Шорпо из говядины', d:'Говядина, картофель, морковь', p:'340', w:'350 г'},
+  {n:'Домашние пельмени', d:'Говядина, репчатый лук, куриный бульон. Подаются с каймаком', p:'310', w:'350 г'},
+  {n:'Куриный суп с домашней лапшой', d:'Куриная грудка, морковь, перепелиное яйцо, домашняя лапша', p:'290', w:'350 г'},
+  {n:'Чечевичный суп', d:'Чечевица, куриный бульон. Подаётся с луком-пореем и лимоном', p:'280', w:'350 г'},
+  {n:'Көк шорпо', d:'Телятина, картофель, морковь, репчатый лук, щавель, перепелиные яйца, укроп, куриный бульон', p:'390', w:'350 г'},
+]};
+
+const bakery = {id:'bakery', title:'Горячие закуски и выпечка', items:[
+  {n:'Пича-нон с мясом', d:'Баранина, болгарский перец, помидоры, репчатый лук и свежая кинза', p:'290', w:'250 г', t:['new']},
+  {n:'Пича-нон с сыром', d:'Сыр сулугуни, помидор, кинза, греческий йогурт', p:'270', w:'300 г', t:['new']},
+  {n:'Каттама', d:'Слоёная лепёшка, подаётся с каймаком', p:'190', w:'180 г', t:['new']},
+  {n:'Боорсок с каймаком', p:'150', w:'170 г'},
+  {n:'Самса с мясом', d:'Говядина, репчатый лук, зира, кориандр', p:'120', w:'120 г'},
+  {n:'Самса с курицей и сыром', d:'Куриное филе, сыр сулугуни, репчатый лук', p:'100', w:'120 г'},
+  {n:'Чебурек с мясом', d:'Говяжий фарш, кинза, репчатый лук', p:'175 / 230', w:'140 / 200 г'},
+  {n:'Чебурек с сыром', d:'Сыр сулугуни, помидор', p:'165 / 220', w:'140 / 200 г'},
+  {n:'Нан', d:'Хлеб', p:'50', w:'0,5 / 1 порция'},
+]};
+
+const salads = {id:'salads', title:'Салаты', items:[
+  {n:'Цезарь с курицей', d:'Куриная грудка, помидоры черри, салат айсберг, сыр пармезан, перепелиные яйца', p:'430', w:'350 г'},
+  {n:'Овощная нарезка', d:'Помидоры, огурцы, болгарский перец, красный лук, кинза, зелёный лук. + сыр сулугуни (60 г) — 60 сом', p:'360', w:'350 г', t:['veg']},
+  {n:'Шакарап', d:'Помидоры, базилик, репчатый лук', p:'170', w:'180 г', t:['veg']},
+  {n:'Греческий салат', d:'Огурцы, помидоры черри, сыр фетакса, болгарский перец, микс салат', p:'370', w:'350 г'},
+  {n:'Хрустящие баклажаны', d:'Баклажаны, томаты черри, кинза, кисло-сладкий соус, крахмал', p:'340', w:'350 г', t:['veg']},
+  {n:'Грузинский салат', d:'Помидоры, огурцы, красный лук, острый перец, петрушка, растительное масло', p:'310', w:'370 г', t:['spicy','veg']},
+]};
+
+const sides = (nugW) => ({id:'sides', title:'Гарниры', items:[
+  {n:'Картофель фри', p:'160', w:'180 г'},
+  {n:'Картофель по-деревенски', p:'180', w:'180 г'},
+  {n:'Картофельное пюре', p:'140', w:'200 г'},
+  {n:'Рис лазер', p:'140', w:'180 г'},
+  {n:'Наггетсы', d:'Куриное филе, панировочные сухари', p:'240', w:nugW},
+]});
+
+const sauces = {id:'sauces', title:'Соусы', vol:'60 сом · 40 г', list:true, items:[
+  {n:'Томатный соус', p:'60'},{n:'Чесночный соус', p:'60'},{n:'Мёд', p:'60'},
+  {n:'Каймак', p:'60'},{n:'Сузьма', p:'60'},{n:'Аджика', d:'острая', p:'60'},
+]};
+
+const drinks = {id:'drinks', title:'Напитки', vol:'0,5 / 1 л', list:true, items:[
+  {n:'Легенда', p:'55 / 85'},{n:'Бонаква', p:'60 / 85'},{n:'Фьюс-ти', p:'85 / 120'},
+  {n:'Кола / Фанта / Спрайт', p:'105 / 160'},{n:'Кинза', p:'105'},{n:'Чалап', p:'65'},
+  {n:'Кымыз', p:'210 / 290'},{n:'Ягодный компот', p:'180'},
+]};
+
+const teaBasic = {id:'tea', title:'Чай', vol:'0,5 / 1 л', list:true, items:[
+  {n:'Чай с молоком', d:'сүт чай', p:'75 / 140'},
+  {n:'Чёрный / зелёный чай', p:'70 / 120'},
+  {n:'Ташкентский чай', p:'220 / 310'},
+]};
+
+const desserts = (medovik) => ({id:'desserts', title:'Десерты', list:true, items:[
+  {n:'Медовик', p:medovik},
+  {n:'Баклава', p:'55 / 220', w:'1 шт / порция'},
+]});
+
+/* --- Только Эркиндик: мангал --- */
+const SERVED = 'Подаётся на лаваше с красным луком, гранатом и свежей зеленью';
+const kebabs = {id:'kebabs', title:'Шашлыки и мангал', note:{html:'Мангал есть только в филиале на бульваре Эркиндик.'}, items:[
+  {n:'Уч-панжа', d:'Телятина (бон-филе) и курдюк. '+SERVED, p:'840'},
+  {n:'Шашлык «Наполеон»', d:'Баранина (филе) и курдюк. '+SERVED, p:'540'},
+  {n:'Шашлык из баранины', d:SERVED, p:'420'},
+  {n:'Шашлык из говядины', d:SERVED, p:'420'},
+  {n:'Шашлык из курицы', d:SERVED, p:'340'},
+  {n:'Куриный шашлык по-кавказски', d:'Сочные куриные бёдра на открытом огне, подаются с овощами гриль', p:'520'},
+  {n:'Люля-кебаб', d:'Говядина и баранина. '+SERVED, p:'360'},
+  {n:'Люля-кебаб из курицы', d:SERVED, p:'320'},
+  {n:'Баклажан «Биштак»', d:'Баклажан на гриле, сыр фетакса, петрушка, чеснок, помидоры, соевый соус, оливковое масло, бальзамический уксус, кинза, базилик', p:'420', t:['veg']},
+  {n:'Шаурма с мясом', d:'Лаваш, телятина на гриле, помидоры, огурцы, листья салата, чесночный соус', p:'420'},
+  {n:'Шаурма с курицей', d:'Лаваш, курица на гриле, помидоры, огурцы, листья салата, чесночный соус', p:'340'},
+  {n:'Овощи гриль', d:'Рекомендуем к шашлыку', p:'240', t:['veg']},
+]};
+
+/* --- Только English Quarter: завтраки и бар --- */
+const breakfast = {id:'breakfast', title:'Завтраки', note:{html:'Завтраки подаём с 08:00 до 14:00.'}, items:[
+  {n:'Казы, боорсок, яйцо', d:'Казы, боорсок, яйцо, помидор, огурец, каймак, сузьма, сумолок', p:'470', w:'450 г', t:['hit']},
+  {n:'Шакшука', d:'Помидор, болгарский перец, репчатый лук, чеснок, базилик, перец чили, сыр брынза, яйца, пита', p:'420', w:'420 г'},
+  {n:'Английский завтрак', d:'Говяжьи колбаски, глазунья, консервированная фасоль, чили соус, пита', p:'480', w:'400 г'},
+  {n:'Греческий завтрак', d:'Говяжьи котлеты, греческий салат, оливки, яйцо, пита, соус дзадзики', p:'410', w:'400 г'},
+  {n:'Кесадилья', d:'Тортилья, куриное бедро, салатные листья, соус барбекю, картофель фри', p:'470', w:'300 г', t:['spicy']},
+  {n:'Боул с курицей', d:BOWL_D, p:'480', w:'350 г'},
+  {n:'Каша овсяная', d:'С листиком мяты и кусочками банана', p:'220', w:'350 г'},
+  {n:'Каша рисовая', d:'С листиком мяты и ягодами клубники', p:'220', w:'350 г'},
+  {n:'Каттама', d:'Подаётся с каймаком', p:'190', w:'180 г'},
+]};
+
+const eqBar = [
+  {id:'coffee', title:'Кофе', vol:'250 / 400 мл', list:true, note:{html:'Кофе с молоком подаём при 65–70 °C. Если любите погорячее — скажите нам.'}, items:[
+    {n:'Эспрессо', p:'130', w:'36 мл'},{n:'Американо', p:'150 / 180'},
+    {n:'Латте', p:'190 / 250'},{n:'Капучино', p:'190 / 250'},{n:'Флэт уайт', p:'240'},{n:'Раф', p:'280'},
+    {n:'Какао', p:'150 / 180'},
+  ]},
+  {id:'coldcoffee', title:'Холодный кофе', vol:'450 мл', list:true, items:[
+    {n:'Латте', p:'220'},{n:'Американо', p:'220'},{n:'Фраппучино с урбечем', d:'хит', p:'280', w:'350 мл'},
+  ]},
+  {id:'coffeeadd', title:'Добавки к кофе', list:true, items:[
+    {n:'Сиропы', p:'25 / 30', w:'15 / 20 мл'},{n:'Молоко', p:'35', w:'50 мл'},{n:'Сливки', p:'60', w:'50 мл'},
+  ]},
+  {id:'authortea', title:'Авторские чаи', vol:'0,5 / 1 л', list:true, items:[
+    {n:'Ташкентский', p:'220 / 310'},{n:'Малиновый', p:'210 / 310'},{n:'Облепиховый', p:'220 / 310'},
+    {n:'Грейпфрутовый', p:'220 / 310'},{n:'Имбирный', p:'210 / 280'},{n:'Марокканский', p:'310'},
+  ]},
+  {id:'tea', title:'Чай', vol:'0,5 / 1 л', list:true, items:[
+    {n:'Чёрный / зелёный', p:'70 / 120'},{n:'Эрл грей', p:'130 / 180'},{n:'Жасмин', p:'130 / 180'},{n:'Молочный улун', p:'120 / 170'},
+  ]},
+  {id:'icetea', title:'Холодные чаи', vol:'450 мл', list:true, items:[
+    {n:'Персик-манго', p:'210'},{n:'Личи-ананас', p:'230'},{n:'Киви-яблоко', p:'210'},
+  ]},
+  {id:'teaadd', title:'Добавки к чаю', list:true, items:[
+    {n:'Лимон', p:'50', w:'0,5 шт'},{n:'Мята', p:'30', w:'5 г'},{n:'Мёд', p:'60', w:'40 г'},{n:'Молоко', p:'35', w:'50 мл'},{n:'Апельсин', p:'50', w:'50 г'},
+  ]},
+  {id:'lemonade', title:'Лимонады', vol:'450 мл / 1 л', list:true, items:[
+    {n:'Мохито', p:'260 / 440'},{n:'Манго-маракуйя', p:'260 / 440'},{n:'Клубника-апельсин', p:'260 / 440'},
+    {n:'Лимонный', p:'220 / 380'},{n:'Грейпфрутовый', p:'260 / 420'},
+  ]},
+  {id:'smoothie', title:'Смузи', vol:'350 мл', list:true, items:[
+    {n:'Ягодный', p:'280'},{n:'Тропический', p:'280'},{n:'Зелёный', p:'270'},
+  ]},
+  {id:'fresh', title:'Фреши', vol:'250 мл', list:true, items:[
+    {n:'Апельсиновый', p:'280'},{n:'Грейпфрутовый', p:'280'},
+  ]},
+  {id:'shake', title:'Милкшейки', vol:'350 мл', list:true, items:[
+    {n:'Клубничный', p:'310'},{n:'Банановый', p:'310'},{n:'Орео', p:'310'},
+  ]},
+];
+
+const BRANCHES = {
+  erkindik:{
+    name:'Бульвар Эркиндик', short:'Эркиндик', addr:'бульвар Эркиндик, 46', hours:'10:00 – 01:00',
+    tel:'+996508750000', telText:'0508 750 000', color:'#C9671F',
+    extra:'Только здесь есть мангал: шашлыки, люля-кебаб, шаурма и баклажан «Биштак».',
+    map:'https://2gis.kg/bishkek/search/%D0%9F%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0%D1%8F%20%D0%AD%D1%80%D0%BA%D0%B8%D0%BD%D0%B4%D0%B8%D0%BA%2046',
+    menu:[plov(), plovExtras('40'), kebabs, hot('450 г'), soups, bakery, salads, sides('—'), sauces, drinks, teaBasic, desserts('230')],
+  },
+  eq:{
+    name:'English Quarter', short:'English Quarter', addr:'ул. Аалы Токомбаева, 24', hours:'08:00 – 00:00',
+    tel:'+996700250000', telText:'0700 250 000', color:'#A8742A',
+    extra:'Только здесь завтраки (08:00–14:00) и барное меню: кофе, авторские чаи, лимонады, смузи и милкшейки.',
+    map:'https://2gis.kg/bishkek/search/%D0%9F%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0%D1%8F%20%D0%A2%D0%BE%D0%BA%D0%BE%D0%BC%D0%B1%D0%B0%D0%B5%D0%B2%D0%B0%2024',
+    menu:[breakfast, plov(), plovExtras('170'), hot('350 г'), soups, bakery, salads, sides('180 г'), sauces, ...eqBar, drinks, desserts('240')],
+  },
+  sevas:{
+    name:'Севастопольская', short:'Севастопольская', addr:'ул. Севастопольская, 34', hours:'09:00 – 00:00',
+    tel:'+996501301301', telText:'0501 301 301', color:'#7B4A2B',
+    extra:'',
+    map:'https://2gis.kg/bishkek/search/%D0%9F%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0%D1%8F%20%D0%A1%D0%B5%D0%B2%D0%B0%D1%81%D1%82%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F%2034',
+    menu:[plov(), plovExtras('170'), hot('350 г'), soups, bakery, salads, sides('180 г'), sauces, drinks, teaBasic, desserts('230')],
+  },
+};
+
+/* ---------- отрисовка ---------- */
+const esc = s => String(s??'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const TAGS = {new:['new','NEW'], hit:['hit','ХИТ'], spicy:['', 'острое'], veg:['','без мяса']};
+const tagHtml = t => (t||[]).map(k => `<span class="tag ${TAGS[k][0]}">${TAGS[k][1]}</span>`).join('');
+const priceHtml = p => p && p!=='—' ? `<span class="price">${esc(p)} сом</span>` : '';
+
+function card(it){
+  const w = it.w && it.w!=='—' ? `<span class="w">${esc(it.w)}</span>` : '<span></span>';
+  return `<article class="dish">
+    ${it.img ? `<img src="${esc(it.img)}" alt="${esc(it.n)}" loading="lazy">` : ''}
+    <div class="body">
+      <div class="name">${tagHtml(it.t)}${esc(it.n)}</div>
+      ${it.d ? `<div class="desc">${esc(it.d)}</div>` : ''}
+      <div class="foot">${w}${priceHtml(it.p)}</div>
+    </div></article>`;
+}
+function row(it){
+  return `<div class="li"><div class="n">${tagHtml(it.t)}${esc(it.n)}${it.d?`<small>${esc(it.d)}</small>`:''}</div>
+    <div class="r">${priceHtml(it.p)}${it.w&&it.w!=='—'?`<small>${esc(it.w)}</small>`:''}</div></div>`;
+}
+function renderCat(c){
+  const vol = c.vol ? `<span class="vol">${esc(c.vol)}</span>` : '';
+  const note = c.note ? `<div class="note${c.note.hot?' hot':''}">${c.note.html}</div>` : '';
+  const body = c.list ? `<div class="list">${c.items.map(row).join('')}</div>`
+                      : `<div class="dishes">${c.items.map(card).join('')}</div>`;
+  return `<div class="cat" id="c-${c.id}"><h3><span>${esc(c.title)}</span>${vol}</h3>${note}${body}</div>`;
+}
+
+function setBranch(key, scroll){
+  const b = BRANCHES[key] || BRANCHES.erkindik; key = BRANCHES[key] ? key : 'erkindik';
+  document.body.dataset.branch = key;
+  document.querySelectorAll('.btab').forEach(el => el.setAttribute('aria-selected', el.dataset.b===key));
+  document.getElementById('binfo').innerHTML =
+    `<h2>${esc(b.name)}</h2>
+     <div class="row"><span>${esc(b.addr)}</span><b>${esc(b.hours)}</b><a href="tel:${b.tel}">${esc(b.telText)}</a></div>
+     ${b.extra?`<p style="margin-top:6px">${esc(b.extra)}</p>`:''}`;
+  document.getElementById('chips').innerHTML = b.menu.map(c => `<a href="#c-${c.id}">${esc(c.title)}</a>`).join('');
+  document.getElementById('menuBody').innerHTML = b.menu.map(renderCat).join('');
+  const call = document.getElementById('callBtn');
+  call.href = 'tel:'+b.tel; call.textContent = 'Позвонить в '+b.short+' · '+b.telText;
+  try{ localStorage.setItem('plovnaya-branch', key); }catch(e){}
+  if (history.replaceState) history.replaceState(null,'','#'+key);
+  if (scroll) document.getElementById('menu').scrollIntoView({behavior:'smooth'});
+}
+
+document.querySelectorAll('.btab').forEach(el => el.addEventListener('click', () => setBranch(el.dataset.b)));
+
+document.getElementById('bcards').innerHTML = Object.entries(BRANCHES).map(([k,b]) =>
+  `<div class="bcard" style="--c:${b.color}">
+     <h3>${esc(b.name)}</h3><div class="hours">${esc(b.hours)}</div>
+     <div class="addr">${esc(b.addr)} · <a href="tel:${b.tel}">${esc(b.telText)}</a></div>
+     ${b.extra?`<div class="only">${esc(b.extra)}</div>`:''}
+     <div class="acts"><button type="button" data-open="${k}">Меню филиала</button>
+     <a href="${b.map}" target="_blank" rel="noopener">2ГИС →</a></div>
+   </div>`).join('');
+document.querySelectorAll('[data-open]').forEach(el => el.addEventListener('click', () => setBranch(el.dataset.open, true)));
+
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (BRANCHES[h]) setBranch(h); });
+
+let start = location.hash.slice(1);
+if (!BRANCHES[start]) { try{ start = localStorage.getItem('plovnaya-branch'); }catch(e){} }
+setBranch(start || 'erkindik');
+</script>
 </body>
 </html>
