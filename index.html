@@ -16,6 +16,7 @@
     --terra:#CC783D; --terra-soft:#DEA67C;
     --cream:#FDF8E1; --cream-2:#FFEBAD;
     --gray:#DAD9D6; --sage:#80897A; --taupe:#6C5C54;
+    --peach:#E9C3A5; --peach-card:#F1D3BB;
     --head:'Oswald','Arial Narrow',sans-serif;
     --body:'PT Serif',Georgia,serif;
   }
@@ -63,6 +64,27 @@
   .tag{display:inline-block;font-family:var(--head);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
     background:var(--sage);color:#fff;padding:2px 8px;border-radius:999px;margin-left:6px;vertical-align:middle}
   .placeholder{background:#fff;border:1px dashed var(--terra-soft);border-radius:14px;padding:16px;color:var(--taupe);font-size:15px}
+
+  /* Фото-меню: карточки «фото + название + состав + цена» */
+  #menu{background:var(--peach)}
+  #menu .cat h3{border-bottom-color:rgba(204,120,61,.35)}
+  .dishes{display:grid;gap:16px}
+  @media (min-width:600px){.dishes{grid-template-columns:1fr 1fr}}
+  .dish{background:var(--peach-card);border:1px solid rgba(108,92,84,.18);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+  .dish .photo{aspect-ratio:4/3;width:100%;object-fit:cover;display:block;background:#E3B08A}
+  .dish .photo.empty{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;
+    background:
+      radial-gradient(circle at 50% 50%,rgba(253,248,225,.55) 0 22%,transparent 23%),
+      repeating-linear-gradient(45deg,#E3B08A 0 12px,#E7B994 12px 24px);
+    color:var(--taupe);font-family:var(--head);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  .dish .photo.empty::before{content:"";width:44px;height:44px;border-radius:50%;border:2px solid rgba(108,92,84,.45);
+    box-shadow:inset 0 0 0 6px rgba(253,248,225,.6)}
+  .dish .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px;flex:1}
+  .dish .name{font-size:19px;color:var(--navy-deep)}
+  .dish .desc{font-size:14.5px;color:var(--taupe);line-height:1.45}
+  .dish .price{margin-top:auto;padding-top:8px;font-family:var(--head);font-size:18px;color:var(--terra)}
+  .dish .price:empty{display:none}
+  .menu-note{font-size:14px;color:var(--taupe);background:var(--peach-card);border-radius:10px;padding:12px 14px;margin-top:18px}
 
   /* Филиалы */
   .branches{display:grid;gap:14px}
@@ -120,30 +142,138 @@
         <p>Казан со свежим пловом открываем два раза в день. Приходите к открытию, пока плов самый горячий.</p>
       </div>
 
-      <!-- КАТЕГОРИИ МЕНЮ. Цены и состав добавить по актуальному меню, ничего не придумывать. -->
+      <!-- ФОТО-МЕНЮ. Формат карточки: фото, название, состав, цена.
+           Фото: заменить <div class="photo empty" ...> на <img class="photo" src="img/....jpg" alt="Название">.
+           Состав: <div class="desc">...</div>. Цена: вписать в <div class="price"></div>, например «450 сом».
+           Состав и цены брать только из актуального меню Пловной, ничего не придумывать. -->
+      <p class="menu-note">Фото, состав и цены добавим после сверки с актуальным меню.</p>
+
       <div class="cat">
         <h3>Плов</h3>
-        <div class="placeholder">Раздел заполнится по актуальному меню: ташкентский, чайханский и другие виды плова с ценами.</div>
+        <div class="dishes">
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Ташкентский плов</div>
+              <div class="price"></div>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Чайханский плов</div>
+              <div class="price"></div>
+            </div>
+          </article>
+        </div>
       </div>
 
       <div class="cat">
         <h3>Горячие блюда</h3>
-        <div class="placeholder">Бешбармак, куурдак, манты, хошан. Цены и граммовки появятся после сверки с меню.</div>
+        <div class="dishes">
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Бешбармак</div>
+              <div class="price"></div>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Куурдак</div>
+              <div class="price"></div>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Манты</div>
+              <div class="price"></div>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Хошан</div>
+              <div class="price"></div>
+            </div>
+          </article>
+        </div>
       </div>
 
       <div class="cat">
         <h3>Супы</h3>
-        <div class="placeholder">Шорпо и другие супы. Цены появятся после сверки с меню.</div>
+        <div class="dishes">
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Шорпо</div>
+              <div class="price"></div>
+            </div>
+          </article>
+        </div>
       </div>
 
       <div class="cat">
         <h3>Мангал <span class="tag">только Эркиндик</span></h3>
-        <div class="placeholder">Шашлык и шишкебек, кебаб, лаваш на мангале с мясом или с курицей, баклажан «Биштак». Всё это есть только в филиале на бульваре Эркиндик.</div>
+        <div class="dishes">
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Шашлык</div>
+              <div class="price"></div>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Шишкебек</div>
+              <div class="price"></div>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Кебаб</div>
+              <div class="price"></div>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Лаваш на мангале с мясом</div>
+              <div class="price"></div>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Лаваш на мангале с курицей</div>
+              <div class="price"></div>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Баклажан «Биштак»</div>
+              <div class="price"></div>
+            </div>
+          </article>
+        </div>
       </div>
 
       <div class="cat">
         <h3>Самса и выпечка</h3>
-        <div class="placeholder">Самса двух видов. Цены появятся после сверки с меню.</div>
+        <div class="dishes">
+          <article class="dish">
+            <div class="photo empty" role="img" aria-label="Фото блюда скоро">фото скоро</div>
+            <div class="body">
+              <div class="name">Самса</div>
+              <div class="price"></div>
+            </div>
+          </article>
+        </div>
       </div>
 
       <div class="cat">
